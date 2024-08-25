@@ -6,6 +6,7 @@ import { format } from "url";
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
+import { Handlers } from "./Handlers";
 
 // Prepare the renderer once the app is ready
 app.on("ready", async () => {
@@ -14,6 +15,7 @@ app.on("ready", async () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    frame: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -30,6 +32,7 @@ app.on("ready", async () => {
       });
 
   mainWindow.loadURL(url);
+  Handlers.register(mainWindow);
 });
 
 // Quit the app once all windows are closed
