@@ -33,14 +33,10 @@ export const UserSwitch = () => {
             </div>
             <FiRepeat />
         </Button>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-            <ModalContent>
-                {
-                    (onClose) => (<>
-                        <UserSelectionModal usuarios={usuarios} onClose={onClose} />
-                    </>)
-                }
-            </ModalContent>
-        </Modal>
+        <UserSelectionModal
+            usuarios={usuarios}
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+        />
     </>
 }
