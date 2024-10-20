@@ -1,5 +1,6 @@
 import { ipcMain } from "electron";
 import { MedicDomain } from "../domain/Medic.domain";
+import { SpecialtyDomain } from "../domain/Specialty.domain";
 
 export const MedicHandler = () => {
     ipcMain.handle('medic', async (_, action: string, args: any[]) => {
@@ -31,6 +32,15 @@ export const MedicHandler = () => {
                     const medic = await medicDomain.get(args[0])
                     console.log(medic)
                     return medic
+                } catch (error) {
+                    console.error(error)
+                }
+                break;
+            case 'listSpecialties':
+                try {
+                    const specialtyDomain = new SpecialtyDomain()
+                    const specialties = await specialtyDomain.list()
+                    return specialties
                 } catch (error) {
                     console.error(error)
                 }

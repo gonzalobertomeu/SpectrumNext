@@ -12,6 +12,6 @@ export class Medic {
     @Column()
     surname!: string
 
-    @ManyToOne(() => Specialty, (speciality) => speciality.id)
-    specialty!: Specialty
+    @ManyToOne(() => Specialty, (speciality) => speciality.id, { nullable: true })
+    specialty?: Specialty
 }

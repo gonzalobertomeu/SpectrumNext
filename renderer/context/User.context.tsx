@@ -5,7 +5,7 @@ export interface User {
     id: number;
     name: string;
     surname: string;
-    speciality?: string;
+    specialty?: string;
 }
 
 export const UserContext = createContext<StatefulContext<User | undefined>>(undefined);

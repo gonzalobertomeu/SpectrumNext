@@ -25,6 +25,11 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
 
     const { isOpen: isOpenNewUser, onOpen: onOpenNewUser, onOpenChange: onOpenChangeNewUser } = useDisclosure();
 
+    const addAndSelectUser = (newUser: User) => {
+        setUsuarios([...usuarios, newUser]);
+        setSelectedUser(newUser);
+    }
+
     return <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
             {
@@ -100,6 +105,7 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
                                 <UserCreationModal
                                     isOpen={isOpenNewUser}
                                     onOpenChange={onOpenChangeNewUser}
+                                    onAddAndSelect={addAndSelectUser}
                                 />
                             </>
                         )}

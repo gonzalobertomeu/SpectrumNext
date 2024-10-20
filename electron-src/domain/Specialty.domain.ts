@@ -34,4 +34,8 @@ export class SpecialtyDomain {
     public async get(id: string) {
         return await this.repository.findOneBy({ id })
     }
+
+    public async list() {
+        return await this.repository.find()
+    }
 }   

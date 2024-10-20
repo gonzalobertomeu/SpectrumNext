@@ -32,10 +32,17 @@ export class MedicDomain {
     }
 
     public async list() {
-        return await this.repository.find()
+        return await this.repository.find({
+            relations: {
+                specialty: true
+            }
+        })
     }
 
     public async get(id: string) {
-        return await this.repository.findOneBy({ id })
+        return await this.repository.findOne({
+            where: { id },
+            relations: { specialty: true }
+        })
     }
 }
