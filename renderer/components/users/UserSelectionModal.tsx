@@ -1,7 +1,7 @@
 import { Autocomplete, AutocompleteItem, Avatar, Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { useContext, useEffect, useState } from "react";
 import { User, UserContext } from "../../context/User.context";
-import { FiRepeat, FiX } from "react-icons/fi";
+import { FiRepeat, FiUserPlus, FiX } from "react-icons/fi";
 import { UserCreationModal } from "./UserCreationModal";
 
 
@@ -15,7 +15,7 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
 
     useEffect(() => {
         window.electron.medic('list').then(setUsuarios)
-        console.log('Usuarios cargados')
+        setSelectedUser(null);
     }, [isOpen])
 
     const [searchValue, setSearchValue] = useState<string>('');
@@ -41,7 +41,7 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
                     <ModalBody>
                         {selectedUser ? (
                             <div className="flex flex-col">
-                                <div className="flex items-center justify-between p-3 mb-2 bg-primary-100 rounded-lg">
+                                <div className="flex items-center justify-between p-3 mb-7 bg-default-100 rounded-lg">
                                     <div className="flex items-center">
                                         <Avatar src={`https://robohash.org/${selectedUser.id}`} size="sm" className="mr-2" />
                                         <span>{selectedUser.name} {selectedUser.surname}</span>
@@ -49,9 +49,11 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
                                     <Button
                                         isIconOnly
                                         size="sm"
-                                        variant="light"
+                                        variant="flat"
+                                        color="danger"
                                         onPress={() => setSelectedUser(null)}
                                         aria-label="Seleccionar usuario"
+                                        tabIndex={3}
                                     >
                                         <FiX />
                                     </Button>
@@ -67,6 +69,7 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
                                     }}
                                     className="mb-2"
                                     aria-label="Cambiar usuario"
+                                    tabIndex={2}
                                 >
                                     Cambiar usuario <FiRepeat />
                                 </Button>
@@ -78,6 +81,7 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
                                     placeholder="Ingrese el nombre del usuario"
                                     fullWidth
                                     className="mb-4"
+                                    tabIndex={0}
                                     items={usuarios.filter(usuario =>
                                         usuario.name.toLowerCase().includes(searchValue.toLowerCase()) ||
                                         usuario.surname.toLowerCase().includes(searchValue.toLowerCase())
@@ -95,12 +99,14 @@ export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
                                 </Autocomplete>
                                 <Button
                                     fullWidth
+                                    variant="light"
                                     color="primary"
                                     onPress={onOpenNewUser}
                                     className="mb-2"
                                     aria-label="Soy usuario nuevo"
+                                    tabIndex={1}
                                 >
-                                    Soy usuario nuevo <FiRepeat />
+                                    Soy usuario nuevo <FiUserPlus />
                                 </Button>
                                 <UserCreationModal
                                     isOpen={isOpenNewUser}
