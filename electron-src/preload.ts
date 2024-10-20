@@ -10,6 +10,9 @@ contextBridge.exposeInMainWorld("electron", {
   windowControl: (action: string) => {
     ipcRenderer.send('window-action', action)
   },
+  medic: (action: string, ...args: any[]) => {
+    return ipcRenderer.invoke('medic', action, args)
+  },
   sayHello: () => ipcRenderer.send("message", "hi from next"),
   receiveHello: (handler: (event: IpcRendererEvent, ...args: any[]) => void) =>
     ipcRenderer.on("message", handler),
