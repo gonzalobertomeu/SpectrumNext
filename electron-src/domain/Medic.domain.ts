@@ -1,6 +1,7 @@
 import { Repository } from "typeorm"
 import { Database } from "../Database"
 import { Medic } from "../entities/Medic.entity"
+import { SpecialtyDomain } from "./Specialty.domain"
 
 export class MedicDomain {
 
@@ -16,12 +17,16 @@ export class MedicDomain {
     public async create(
         name: string,
         surname: string,
-        speciality: string
+        speciality_id: string
     ) {
+        const specialty = await (new SpecialtyDomain()).get(speciality_id)
+        if (!specialty) {
+            throw new Error('Specialty not found')
+        }
         const medic = new Medic()
         medic.name = name
         medic.surname = surname
-        medic.speciality = speciality
+        medic.specialty = specialty
         await this.repository.save(medic)
         return medic;
     }

@@ -8,6 +8,7 @@ import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
 import { Handlers } from "./Handlers";
 import { Database } from "./Database";
+import { SpecialtyDomain } from "./domain/Specialty.domain";
 
 // Prepare the renderer once the app is ready
 app.on("ready", async () => {
@@ -35,6 +36,7 @@ app.on("ready", async () => {
 
     try {
         await Database.getInstance().initialize();
+        await (new SpecialtyDomain()).default()
         mainWindow.loadURL(url);
         Handlers.register(mainWindow);
     } catch (error) {

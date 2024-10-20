@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { Medic } from "./entities/Medic.entity"
+import { Specialty } from "./entities/Specialty.entity"
 
 
 
@@ -19,7 +20,7 @@ export class Database {
         this.dataSource = new DataSource({
             type: "sqlite",
             database: "db.sqlite",
-            entities: [Medic],
+            entities: [Medic, Specialty],
             synchronize: true,
         })
     }

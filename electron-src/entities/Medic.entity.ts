@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Specialty } from "./Specialty.entity"
 
 @Entity()
 export class Medic {
@@ -11,6 +12,6 @@ export class Medic {
     @Column()
     surname!: string
 
-    @Column()
-    speciality!: string
+    @ManyToOne(() => Specialty, (speciality) => speciality.id)
+    specialty!: Specialty
 }

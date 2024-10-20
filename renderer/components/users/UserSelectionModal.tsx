@@ -1,19 +1,23 @@
 import { Autocomplete, AutocompleteItem, Avatar, Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { User, UserContext } from "../../context/User.context";
 import { FiRepeat, FiX } from "react-icons/fi";
 import { UserCreationModal } from "./UserCreationModal";
 
-interface UserSelectionModalProps {
-    usuarios: User[];
-}
 
 interface ModalProps {
     isOpen: boolean;
     onOpenChange: (isOpen: boolean) => void;
 }
 
-export const UserSelectionModal = ({ usuarios, isOpen, onOpenChange }: UserSelectionModalProps & ModalProps) => {
+export const UserSelectionModal = ({ isOpen, onOpenChange }: ModalProps) => {
+    const [usuarios, setUsuarios] = useState<User[]>([]);
+
+    useEffect(() => {
+        window.electron.medic('list').then(setUsuarios)
+        console.log('Usuarios cargados')
+    }, [isOpen])
+
     const [searchValue, setSearchValue] = useState<string>('');
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
 

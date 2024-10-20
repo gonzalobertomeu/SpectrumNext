@@ -2,7 +2,6 @@ import { Autocomplete, AutocompleteItem, Avatar, Button, Input, Modal, ModalBody
 import { useContext, useEffect, useState } from "react"
 import { FiRepeat, FiX } from 'react-icons/fi'
 import { UserContext } from "../../context/User.context"
-import { users as usuarios } from "../../mock/users.mock"
 import { UserSelectionModal } from "./UserSelectionModal"
 
 export const UserSwitch = () => {
@@ -34,7 +33,6 @@ export const UserSwitch = () => {
             <FiRepeat />
         </Button>
         <UserSelectionModal
-            usuarios={usuarios}
             isOpen={isOpen}
             onOpenChange={onOpenChange}
         />
