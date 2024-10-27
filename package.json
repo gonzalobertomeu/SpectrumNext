@@ -1,7 +1,10 @@
 {
   "private": true,
+  "author": "Gonzalo Bertomeu",
+  "name": "spectrum-next",
+  "version": "0.0.1",
   "main": "main/index.js",
-  "productName": "ElectronTypescriptNext",
+  "productName": "SpectrumNext",
   "scripts": {
     "clean": "rimraf dist main renderer/out renderer/.next",
     "dev": "npm run build-electron && electron .",
